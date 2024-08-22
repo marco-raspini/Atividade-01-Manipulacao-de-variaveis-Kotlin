@@ -31,9 +31,10 @@ fun main(args: Array<String>) {
 
     // Formatação de valores
     val dec = DecimalFormat("#.00")
+    val valComImpostoFormatado = dec.format(valComImposto)
     val valTotalFormatado = dec.format(precoVendaNecessario)
 
-    saudacao = ("Produto: $produto, seu valor é de R$$valComImposto, seu valor de venda sugerido é de R$precoVendaNecessario")
+    saudacao = ("Produto: $produto, seu valor é de R$$valComImpostoFormatado, seu valor de venda sugerido é de R$$valTotalFormatado")
 
 // =================== CLASSES ==========================================================================================
 
