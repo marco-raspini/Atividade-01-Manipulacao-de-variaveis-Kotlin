@@ -1,8 +1,6 @@
-// =================== PRINTS ==========================================================================================
+// =================== IMPORTS ==========================================================================================
 
 import java.text.DecimalFormat
-
-
 
 // =================== CÓDIGOS ==========================================================================================
 
@@ -19,22 +17,23 @@ fun main(args: Array<String>) {
     produto = "Camiseta Furia"
     precoProduto = 350.0
     qtddProdutosComp = 1
-    taxaProdutos = 1.5
-    taxaLucro = 15.0
+    taxaProdutos = 0.15
+    taxaLucro = 0.15
+
 
     var valSemImposto = calcValSemImposto(precoProduto, qtddProdutosComp)
 
-    var valComImposto = calcValImposto(valSemImposto, taxaProdutos)
+    var valImposto = calcValImposto(valSemImposto, taxaProdutos)
 
-    var valTotal = calcValTotal(valSemImposto, taxaLucro, valComImposto)
+    var valComImposto = calValComImposto(valSemImposto, valImposto)
 
-    saudacao = ("Produto: $produto, seu valor é de R$$valComImposto, seu valor de venda sugerido é de R$valTotal")
-
+    var precoVendaNecessario = calcPrecoVenda(valComImposto, taxaLucro)
 
     // Formatação de valores
     val dec = DecimalFormat("#.00")
-    val valTotalFormatado = dec.format(valTotal)
+    val valTotalFormatado = dec.format(precoVendaNecessario)
 
+    saudacao = ("Produto: $produto, seu valor é de R$$valComImposto, seu valor de venda sugerido é de R$precoVendaNecessario")
 
 // =================== CLASSES ==========================================================================================
 
@@ -48,7 +47,7 @@ fun main(args: Array<String>) {
     println("Quantidade de produtos comprados: $qtddProdutosComp")
     println("Taxa dos produtos: $taxaProdutos")
     println("Taxa de lucro: $taxaLucro")
-    println("Valor total: $valTotal")
+    println("Valor total: $precoVendaNecessario")
     println("Valor sem imposto:  $valSemImposto")
     println("Valor com imposto R$ ${valComImposto}")
     println("Valor desejado do produto R$ ${valTotalFormatado}")
@@ -73,7 +72,6 @@ fun calValComImposto(var1: Double, var2: Double): Double {
     return (var1 + var2)
 }
 
-
-fun calcValTotal(var1: Double, var2: Double, var3: Double): Double {
-    return ((var1 * (var2 / 100)) + var3)
+fun calcPrecoVenda(var1: Double, var2: Double): Double {
+    return (var1 * (1 + var2))
 }
